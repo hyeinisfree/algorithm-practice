@@ -1,53 +1,32 @@
-import sys
-# sys.stdin = open("C:/Users/JIn/PycharmProjects/coding_Test/input.txt", "rt")
+def cal(x, y):
+    return (x//3)*3 + (y//3)
 
-def pretty_print():
-    for i in range(9):
-        for j in range(9):
-            print(board[i][j], end='')
-        print()
-
-def find_empty():
-    for i in range(9):
-        for j in range(9):
-            if board[i][j] == 0:
-                return i, j
-    return None, None
-
-def valid(col, row, val):
-    # 가로 축 점검
-    for i in range(9):
-        if board[col][i] == val:
-            return False
-
-    # 세로 축 점검
-    for i in range(9):
-        if board[i][row] == val:
-            return False
-
-    # 3x3 박스 점검
-    box_col = col // 3 * 3
-    box_row = row // 3 * 3
-    for i in range(3):
-        for j in range(3):
-            if board[box_col+i][box_row+j] == val:
-                return False
-    return True
-
-def solution():
-    col, row = find_empty()
-    if col is None:
+def sol(n):
+    if n == 81:
+        for i in B:
+            print(''.join(map(str, i)))
         return True
+    x = n // 9
+    y = n % 9
+    if B[x][y]: return sol(n+1)
     else:
         for i in range(1, 10):
-            if valid(col, row, i):
-                board[col][row] = i
-                if solution():
-                    return True
-                board[col][row] = 0
-        return False
+            if not c1[x][i] and not c2[y][i] and not c3[cal(x,y)][i]:
+                c1[x][i] = c2[y][i] = c3[cal(x,y)][i] = True
+                B[x][y] = i
+                if sol(n+1): return True
+                c1[x][i] = c2[y][i] = c3[cal(x,y)][i] = False
+                B[x][y] = 0
+    return False
 
-if __name__ == '__main__':
-    board = [list(map(int, input())) for _ in range(9)]
-    solution()
-    pretty_print()
+B = [list(map(int, input())) for _ in range(9)]
+c1 = [[False]*10 for _ in range(9)] #행
+c2 = [[False]*10 for _ in range(9)] #열
+c3 = [[False]*10 for _ in range(9)] #사각형
+for i in range(9):
+    for j in range(9):
+        if B[i][j]:
+            c1[i][B[i][j]] = True
+            c2[j][B[i][j]] = True
+            c3[cal(i, j)][B[i][j]] = True
+sol(0)
