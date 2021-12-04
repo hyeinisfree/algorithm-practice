@@ -1,5 +1,3 @@
-# 거스름돈 문제
-
 import sys
 input = sys.stdin.readline
 

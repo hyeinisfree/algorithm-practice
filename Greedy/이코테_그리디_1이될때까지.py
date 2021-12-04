@@ -1,5 +1,3 @@
-# 1이 될 때까지
-
 import sys
 input = sys.stdin.readline
 
