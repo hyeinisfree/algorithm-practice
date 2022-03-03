@@ -4,7 +4,7 @@ def perm1(arr, r):
     used = [False] * len(arr)
     output = []
     
-    def generate(chosen, used):
+    def generate(chosen):
         if len(chosen) == r:
             output.append(chosen[:])
             return
@@ -13,11 +13,11 @@ def perm1(arr, r):
             if not used[i]:
                 chosen.append(arr[i])
                 used[i] = True
-                generate(chosen, used)
+                generate(chosen)
                 used[i] = False
                 chosen.pop()
 
-    generate([], used)
+    generate([])
     return output
 
 # Swap

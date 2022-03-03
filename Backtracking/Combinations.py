@@ -4,7 +4,7 @@ def comb1(arr, r):
     used = [False] * len(arr)
     output = []
     
-    def generate(level, chosen, used):
+    def generate(level, chosen):
         if len(chosen) == r:
             output.append(chosen[:])
             return
@@ -12,11 +12,11 @@ def comb1(arr, r):
             if not used[i]:
                 chosen.append(arr[i])
                 used[i] = True
-                generate(i+1, chosen, used)
+                generate(i+1, chosen)
                 used[i] = False
                 chosen.pop()
         
-    generate(0, [], used)
+    generate(0, [])
     return output
 
 def comb2(arr, r):

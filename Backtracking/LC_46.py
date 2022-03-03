@@ -2,7 +2,6 @@ class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         output = []
         def BT(level, chosen):
-            nonlocal output
             if level == len(nums):
                 output.append(chosen.copy())
                 return

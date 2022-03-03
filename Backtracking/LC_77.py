@@ -4,17 +4,17 @@ class Solution:
         used = [False] * len(arr)
         output = []
 
-        def generate(level, chosen, used):
-            if len(chosen) == k:
-                output.append(chosen[:])
+        def BT(level, chosen):
+            if level == k:
+                output.append(chosen.copy())
                 return
             for i in range(level, len(arr)):
                 if not used[i]:
                     chosen.append(arr[i])
                     used[i] = True
-                    generate(i+1, chosen, used)
+                    BT(i+1, chosen)
                     used[i] = False
                     chosen.pop()
 
-        generate(0, [], used)
+        BT(0, [])
         return output
