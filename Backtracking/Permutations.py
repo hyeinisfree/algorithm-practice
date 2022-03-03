@@ -1,53 +1,71 @@
-from itertools import permutations
-
+# Recursion
 def perm1(arr, r):
-  result = []
-  if r > len(arr):
-    return result
-  
-  if r == 1:
-    for i in arr:
-      result.append([i])
-  elif r > 1:
-    for i in range(len(arr)):
-      ans = [i for i in arr]
-      ans.remove(arr[i])
-      for p in perm1(ans, r-1):
-        result.append([arr[i]]+p)
-  
-  return result
-
-def perm2(arr, r):
-  arr = sorted(arr)
-  used = [0 for _ in range(len(arr))]
-  
-  def generate(chosen, used):
-    if len(chosen) == r:
-      print(chosen)
-      return
+    arr.sort()
+    used = [False] * len(arr)
+    output = []
     
-    for i in range(len(arr)):
-      if not used[i]:
-        chosen.append(arr[i])
-        used[i] = 1
-        generate(chosen, used)
-        used[i] = 0
-        chosen.pop()
-  generate([], used)
-  
+    def generate(chosen, used):
+        if len(chosen) == r:
+            output.append(chosen[:])
+            return
+
+        for i in range(len(arr)):
+            if not used[i]:
+                chosen.append(arr[i])
+                used[i] = True
+                generate(chosen, used)
+                used[i] = False
+                chosen.pop()
+
+    generate([], used)
+    return output
+
+# Swap
+def perm2(arr, r):
+    arr.sort()
+    output = []
+    
+    def generate(level):
+        if level == r:
+            output.append(arr[:r])
+            return
+        for i in range(level, len(arr)):
+            arr[i], arr[level] = arr[level], arr[i]
+            generate(level+1)
+            arr[i], arr[level] = arr[level], arr[i]
+            
+    generate(0)
+    return output
+
+# Generator
 def perm3(array, r):
-  for i in range(len(array)):
-    if r == 1:
-      yield [array[i]]
-    else:
-      for next in perm3(array[:i]+array[i+1:], r-1):
-        yield [array[i]] + next
+    for i in range(len(array)):
+        if r == 1:
+            yield [array[i]]
+        else:
+            for next in perm3(array[:i]+array[i+1:], r-1):
+                yield [array[i]] + next
 
-
-arr = [1, 2, 3, 4, 5]
-
-print(perm1(arr, 2))
-perm2(arr, 2)
-print(list(perm3(arr, 2)))
-
-print(list(permutations(arr, 2)))
+# While                
+def perm4(arr):
+    result = [arr[:]]
+    c = [0] * len(arr)
+    i = 0
+    while i < len(arr):
+        if c[i] < i:
+            if i % 2 == 0:
+                arr[0], arr[i] = arr[i], arr[0]
+            else:
+                arr[c[i]], arr[i] = arr[i], arr[c[i]]
+            result.append(arr[:])
+            c[i] += 1
+            i = 0
+        else:
+            c[i] = 0
+            i += 1
+    return result
+                
+print(perm1([1,2,3],3))
+print(perm2([1,2,3],3))
+print(list(perm3([1,2,3],3)))
+print(perm4([1,2,3]))
