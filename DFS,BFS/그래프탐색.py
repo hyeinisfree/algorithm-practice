@@ -23,7 +23,7 @@ def iterDFS(graph, start):
             stack.extend(graph[v])
     return visited
 
-def bfs(graph, start, visited):
+def BFS(graph, start, visited):
     visited.append(start)
     queue = deque([start])
     
@@ -34,6 +34,7 @@ def bfs(graph, start, visited):
             if i not in visited:
                 visited.append(i)
                 queue.append(i)
+                
     return visited
 
 graph = [
