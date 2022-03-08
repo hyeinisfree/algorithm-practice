@@ -14,7 +14,7 @@ def solution1(numbers):
                 answer += 1
                 
     return answer
-  
+
 def solution2(numbers):
     answer = 0
     
@@ -33,6 +33,6 @@ def is_prime(x):
         if x % i == 0:
             return False
     return True
-  
+
 print(solution1("011"))
 print(solution2("011"))
