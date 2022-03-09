@@ -3,7 +3,6 @@ from typing import List
 class Solution:
     def combine(self, n: int, k: int) -> List[List[int]]:
         arr = range(1, n+1)
-        used = [False] * len(arr)
         output = []
 
         def BT(level, chosen):
@@ -11,12 +10,9 @@ class Solution:
                 output.append(chosen.copy())
                 return
             for i in range(level, len(arr)):
-                if not used[i]:
-                    chosen.append(arr[i])
-                    used[i] = True
-                    BT(i+1, chosen)
-                    used[i] = False
-                    chosen.pop()
+                chosen.append(arr[i])
+                BT(i+1, chosen)
+                chosen.pop()
 
         BT(0, [])
         return output
