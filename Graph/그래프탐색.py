@@ -51,4 +51,4 @@ graph = [
 
 print(recurDFS(graph, 1, []))
 print(iterDFS(graph, 1))
-print(bfs(graph, 1, []))
+print(BFS(graph, 1, []))
