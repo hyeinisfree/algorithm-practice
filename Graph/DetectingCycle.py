@@ -1,15 +1,16 @@
 from typing import List
 
 class HasCycle:
-    def hasCycle(self, graph:List[List[int]]) -> bool:
+    def hasCycle(self, graph) -> bool:
         self.graph = graph
         self.seen = set()
         
-        for idx in range(len(graph)):
+        for idx in graph:
             loop_track = set()
             ret = self.recurDFS(idx, loop_track)
             if ret:
-                return True
+                print(loop_track)
+                break
         
         return False
     
@@ -19,6 +20,7 @@ class HasCycle:
         if idx in loop_track:
             return True
         
+        print(idx)
         loop_track.add(idx)
         nexts = self.graph[idx]
         for adj_idx in nexts:
@@ -32,4 +34,4 @@ class HasCycle:
         
         
 hasCycle = HasCycle()
-print(hasCycle.hasCycle([[1],[],[0],[0,4],[1,6],[4],[5]]))
+print(hasCycle.hasCycle({'b': ['c'], 'a': ['b'], 'e': ['f'], 'h': [], 'd': ['e'], 'f': ['d'], 'c': []}))
