@@ -7,7 +7,7 @@ class Solution:
         if len(digits) == 0:
             return []
     
-        self.digits = digits = digits
+        self.digits = digits 
         self.comb = []
         self.bt(0, '')
         
