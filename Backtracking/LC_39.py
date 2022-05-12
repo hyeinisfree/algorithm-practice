@@ -3,19 +3,26 @@ from typing import List
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         candidates.sort()
-        output = []
+        self.candidates = candidates
+        self.target = target
+        self.combs = []
         
-        def BT(level, chosen, targetSum):
-            if targetSum == 0:
-                output.append(chosen.copy())
-                return
-            elif targetSum < 0:
-                return
+        self.bt(0, target, [])
+        return self.combs
+    
+    def bt(self, prevIdx: int, targetSum: int, comb:List[int]):
+        # exit conditions
+        if targetSum == 0:
+            self.combs.append(comb.copy())
+            return
+        elif targetSum < 0:
+            return
+        
+        # process(candidates filtering)
+        for idx in range(prevIdx, len(self.candidates)):
+            num = self.candidates[idx]
             
-            for i in range(level, len(candidates)):
-                chosen.append(candidates[i])
-                BT(i, chosen, targetSum-candidates[i])
-                chosen.pop()
-                    
-        BT(0, [], target)
-        return output
+            # recursion call
+            comb.append(num)
+            self.bt(idx, targetSum-num, comb)
+            comb.pop()
