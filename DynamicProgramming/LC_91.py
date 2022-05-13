@@ -15,7 +15,7 @@ class Solution:
         else:
             dp[str_length-1] = 1
             
-        for idx in range(str_length-2, -1, -1):
+        for idx in range(str_length-2,-1,-1):
             single_num = int(s[idx])
             single_count = 0
             if single_num > 0:
@@ -30,6 +30,3 @@ class Solution:
             dp[idx] = count
             
         return dp[0]
-        
-solution = Solution()
-print(solution.nemDecodings("212325"))

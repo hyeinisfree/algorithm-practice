@@ -1,3 +1,5 @@
+from typing import List
+
 class Solution:
     def climbStairs(self, n: int) -> int:
         dp_array = [0,1,2]
@@ -8,4 +10,5 @@ class Solution:
         for i in range(3, n+1):
             ith_way = dp_array[i-1] + dp_array[i-2]
             dp_array.append(ith_way)
+
         return dp_array[n]

@@ -25,6 +25,3 @@ class Solution:
             dp_array[idx] = -1 if crnt_min==max_cost else crnt_min
             
         return dp_array[amount]
-
-solution = Solution()
-print(solution.coinChange(coins=[2,3,5], amount = 10))

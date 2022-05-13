@@ -6,14 +6,14 @@ class Solution:
         cols = len(grid[0])
         minCost2d = a = [[0] * cols for i in range(rows)]
         
-        #initialize 2d cost map
+        # initialize 2d cost map
         minCost2d[0][0] = grid[0][0]
         for colIdx in range(1,cols):
             minCost2d[0][colIdx] = grid[0][colIdx] + minCost2d[0][colIdx-1]
         for rowIdx in range(1,rows):
             minCost2d[rowIdx][0] = grid[rowIdx][0] + minCost2d[rowIdx-1][0]
         
-        #bottom up DP
+        # bottom up DP
         for rowIdx in range (1,rows):
             for colIdx in range (1,cols):
                 prevCol = colIdx - 1
